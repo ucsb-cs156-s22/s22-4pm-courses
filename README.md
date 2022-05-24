@@ -1,7 +1,8 @@
 # team04-w22-5pm-courses
 
 [![codecov](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-5pm-courses/branch/main/graph/badge.svg?token=LvEIQ6tYti)](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-5pm-courses)
-
+Add a link to the deployed Heroku app for your team here:
+team2: https://proj01-s22-4pm-courses.herokuapp.com/
 Storybook is here:
 * Production: <https://ucsb-cs156-w22.github.io/team04-w22-5pm-courses-docs/>
 * QA:  <https://ucsb-cs156-w22.github.io/team04-w22-5pm-courses-docs-qa/>
