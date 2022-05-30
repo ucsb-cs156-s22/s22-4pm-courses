@@ -13,6 +13,9 @@ import PersonalSchedulesIndexPage from "main/pages/PersonalSchedules/PersonalSch
 import PersonalSchedulesCreatePage from "main/pages/PersonalSchedules/PersonalSchedulesCreatePage";
 
 import SectionSearchesIndexPage from "main/pages/SectionSearches/SectionSearchesIndexPage";
+import CoursesIndexPage from "main/pages/Courses/CoursesIndexPage";
+import CoursesCreatePage from "main/pages/Courses/CoursesCreatePage";
+import CoursesByPsIdPage from "main/pages/Courses/CoursesByPsIdPage";
 
 
 function App() {
@@ -38,6 +41,10 @@ function App() {
             <>
               <Route exact path="/personalschedules/list" element={<PersonalSchedulesIndexPage />} />
               <Route exact path="/personalschedules/create" element={<PersonalSchedulesCreatePage />} />
+
+              <Route exact path="/courses/list" element={<CoursesIndexPage />} />
+              <Route exact path="/courses/create" element={<CoursesCreatePage />} />
+              <Route exact path="/courses/psid/list" element={<CoursesByPsIdPage />} />
             </>
           )
         }
