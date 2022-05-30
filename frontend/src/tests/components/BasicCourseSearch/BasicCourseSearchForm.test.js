@@ -20,6 +20,8 @@ jest.mock("react-toastify", () => ({
 describe("BasicCourseSearchForm tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
   beforeEach(() => {
+    jest.spyOn(console, 'error')
+    console.error.mockImplementation(() => null);
     axiosMock
       .onGet("/api/currentUser")
       .reply(200, apiCurrentUserFixtures.userOnly);
@@ -30,6 +32,8 @@ describe("BasicCourseSearchForm tests", () => {
   const queryClient = new QueryClient();
   const addToast = jest.fn();
   beforeEach(() => {
+    jest.spyOn(console, 'error')
+    console.error.mockImplementation(() => null);
     toast.mockReturnValue({
       addToast: addToast,
     });

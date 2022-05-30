@@ -16,10 +16,13 @@ jest.mock("react", () => ({
 
 describe("SingleSubjectDropdown tests", () => {
   beforeEach(() => {
+    jest.spyOn(console, 'error')
+    console.error.mockImplementation(() => null);
     useState.mockImplementation(jest.requireActual("react").useState);
   });
 
   afterEach(() => {
+    console.error.mockRestore()
     jest.clearAllMocks();
   });
 

@@ -25,6 +25,8 @@ describe("HomePage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   beforeEach(() => {
+    jest.spyOn(console, 'error')
+    console.error.mockImplementation(() => null);
     axiosMock.resetHistory();
     axiosMock
       .onGet("/api/currentUser")
