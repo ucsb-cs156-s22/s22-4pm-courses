@@ -7,34 +7,22 @@ export default function BasicCourseTable({ courses }) {
 
     const columns = [
         {
+            Header: 'Id',
+            accessor: 'id',
+        },
+        {
+            Header: 'Enrollment code',
+            accessor: 'enrollCd',
+        },
+        {
+            Header: 'Personal Schedule Id',
+            accessor: 'psId',
+        },
+        {
             Header: 'Quarter',
-            accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
+            accessor: (row, _rowIndex) => yyyyqToQyy(row.id),
             id: 'quarter',
-        },
-        {
-            Header: 'Course Id',
-            accessor: 'courseId',
-        },
-        {
-            Header: 'Title',
-            accessor: 'title',
-        },
-        {
-            Header: 'Description',
-            accessor: 'description',
-        },
-        {
-            Header: 'Level Code',
-            accessor: 'objLevelCode',
-        },
-        {
-            Header: 'Subject Area',
-            accessor: 'subjectArea',
-        },
-        {
-            Header: 'Units',
-            accessor: 'unitsFixed',
-        },
+        }
     ];
 
     return <OurTable

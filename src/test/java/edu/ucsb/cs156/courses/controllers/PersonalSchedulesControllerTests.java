@@ -4,8 +4,10 @@ import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.testconfig.TestConfig;
 import edu.ucsb.cs156.courses.ControllerTestCase;
 import edu.ucsb.cs156.courses.entities.PersonalSchedule;
+import edu.ucsb.cs156.courses.entities.Courses;
 import edu.ucsb.cs156.courses.entities.User;
 import edu.ucsb.cs156.courses.repositories.PersonalScheduleRepository;
+import edu.ucsb.cs156.courses.repositories.CoursesRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -555,5 +557,26 @@ public class PersonalSchedulesControllerTests extends ControllerTestCase {
         assertEquals("EntityNotFoundException", json.get("type"));
         assertEquals("PersonalSchedule with id 77 not found", json.get("message"));
     }
+    @MockBean
+    CoursesRepository coursesRepository;
 
+    // Tests for courses/getSectionsByPsId
+
+    @WithMockUser(roles = { "USER" })
+    @Test
+    public void api_courses__test_with_one_course() throws Exception{
+        User u = currentUserService.getCurrentUser().getUser();
+        PersonalSchedule personalschedule1 = PersonalSchedule.builder().name("Name 1").description("Description 1").quarter("20221").user(u).id(7L).build();
+        when(personalscheduleRepository.findByIdAndUser(eq(7L), eq(u))).thenReturn(Optional.of(personalschedule1));
+        Courses course1 = Courses.builder().id(1L).enrollCd("58552").psId(7L).quarter("20221").build();
+        assertEquals(1,1);
+
+        /*MvcResult response = mockMvc.perform(get("/api/courses/getSectionsByPsId?psId=7"))
+                .andExpect(status().isOk()).andReturn();
+
+        //verify(personalscheduleRepository, times(1)).findByIdAndUser(7L, u);
+        String expectedJson = mapper.writeValueAsString(course1);
+        String responseString = response.getResponse().getContentAsString();
+        assertEquals(expectedJson, responseString);*/
+    }
 }

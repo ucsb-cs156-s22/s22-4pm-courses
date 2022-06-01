@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CoursesRepository extends CrudRepository<Courses, Long> {
-  
+  Iterable<Courses> findAllBypsId(long psId);
 }
