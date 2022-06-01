@@ -29,6 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Optional;
 
+
+import edu.ucsb.cs156.courses.entities.PersonalSchedule;
+import edu.ucsb.cs156.courses.repositories.PersonalScheduleRepository;
+
 @Api(description = "Courses")
 @RequestMapping("/api/courses")
 @RestController
@@ -37,6 +41,8 @@ public class CoursesController extends ApiController {
 
     @Autowired
     CoursesRepository coursesRepository;
+    @Autowired
+    PersonalScheduleRepository personalScheduleRepository;
 
     @ApiOperation(value = "List all courses (admin)")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -98,21 +104,24 @@ public class CoursesController extends ApiController {
     }
 
 
-    @ApiOperation(value = "Create a new course")
+    @ApiOperation(value = "Create a new course (user)")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
     public Courses postCourses(
             @ApiParam("enrollCd") @RequestParam String enrollCd,
-            @ApiParam("psId") @RequestParam Long psId,
-            @ApiParam("quarter") @RequestParam String quarter) {
+            @ApiParam("psId") @RequestParam Long psId) {
         CurrentUser currentUser = getCurrentUser();
         log.info("currentUser={}", currentUser);
+        // Check if psId exists
+        PersonalSchedule checkPsId = personalScheduleRepository.findByIdAndUser(psId, currentUser.getUser())
+            .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
+        // Check if enrollCd exists
+        
 
         Courses courses = new Courses();
         courses.setUser(currentUser.getUser());
         courses.setEnrollCd(enrollCd);
         courses.setPsId(psId);
-        courses.setQuarter(quarter);
         Courses savedCourses = coursesRepository.save(courses);
         return savedCourses;
     }
@@ -153,7 +162,6 @@ public class CoursesController extends ApiController {
 
           courses.setEnrollCd(incomingCourses.getEnrollCd());
           courses.setPsId(incomingCourses.getPsId());
-          courses.setQuarter(incomingCourses.getQuarter());
 
         coursesRepository.save(courses);
 
@@ -172,7 +180,6 @@ public class CoursesController extends ApiController {
 
         courses.setEnrollCd(incomingCourses.getEnrollCd());
         courses.setPsId(incomingCourses.getPsId());
-        courses.setQuarter(incomingCourses.getQuarter());
 
         coursesRepository.save(courses);
 

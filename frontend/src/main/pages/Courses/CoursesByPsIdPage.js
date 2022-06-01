@@ -24,7 +24,7 @@ export default function CoursesByPsIdPage() {
     return (
         <BasicLayout>
             <div className="pt-2">
-                <h1>Courses for Personal Schedule: {id}</h1>
+                <h1>Personal Schedule: {id}</h1>
                 <CourseTable courses={courses} currentUser={currentUser} />
             </div>
         </BasicLayout>
