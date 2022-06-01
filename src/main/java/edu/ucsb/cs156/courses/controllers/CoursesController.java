@@ -118,6 +118,7 @@ public class CoursesController extends ApiController {
             @ApiParam("psId") @RequestParam Long psId) {
         CurrentUser currentUser = getCurrentUser();
         log.info("currentUser={}", currentUser);
+        
         // Check if psId exists
         PersonalSchedule checkPsId = personalScheduleRepository.findByIdAndUser(psId, currentUser.getUser())
             .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
