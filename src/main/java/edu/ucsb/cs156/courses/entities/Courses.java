@@ -23,5 +23,5 @@ public class Courses {
 
   private String enrollCd;
   private String psId;
-  private String quarter;
+  //private String quarter;
 }

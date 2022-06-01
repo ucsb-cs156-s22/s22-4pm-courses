@@ -1,40 +1,23 @@
 import React from "react";
 import OurTable from "main/components/OurTable";
 
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
+//import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
 
 export default function BasicCourseTable({ courses }) {
 
     const columns = [
         {
-            Header: 'Quarter',
-            accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
-            id: 'quarter',
+            Header: 'Id',
+            accessor: 'id',
         },
         {
-            Header: 'Course Id',
-            accessor: 'courseId',
+            Header: 'Enrollment code',
+            accessor: 'enrollCd',
         },
         {
-            Header: 'Title',
-            accessor: 'title',
-        },
-        {
-            Header: 'Description',
-            accessor: 'description',
-        },
-        {
-            Header: 'Level Code',
-            accessor: 'objLevelCode',
-        },
-        {
-            Header: 'Subject Area',
-            accessor: 'subjectArea',
-        },
-        {
-            Header: 'Units',
-            accessor: 'unitsFixed',
-        },
+            Header: 'Personal Schedule Id',
+            accessor: 'psId',
+        }
     ];
 
     return <OurTable
