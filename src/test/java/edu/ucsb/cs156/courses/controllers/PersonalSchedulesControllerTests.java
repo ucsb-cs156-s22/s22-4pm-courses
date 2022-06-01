@@ -571,12 +571,12 @@ public class PersonalSchedulesControllerTests extends ControllerTestCase {
         Courses course1 = Courses.builder().id(1L).enrollCd("58552").psId(7L).quarter("20221").build();
         assertEquals(1,1);
 
-        /*MvcResult response = mockMvc.perform(get("/api/courses/getSectionsByPsId?psId=7"))
+        MvcResult response = mockMvc.perform(get("/api/courses/getSectionsByPsId?psId=7"))
                 .andExpect(status().isOk()).andReturn();
 
         //verify(personalscheduleRepository, times(1)).findByIdAndUser(7L, u);
         String expectedJson = mapper.writeValueAsString(course1);
         String responseString = response.getResponse().getContentAsString();
-        assertEquals(expectedJson, responseString);*/
+        assertEquals(expectedJson, responseString);
     }
 }
