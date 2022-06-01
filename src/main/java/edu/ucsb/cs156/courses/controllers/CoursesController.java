@@ -27,11 +27,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Optional;
+import javax.validation.constraints.Null;
 
+import java.util.Optional;
 
 import edu.ucsb.cs156.courses.entities.PersonalSchedule;
 import edu.ucsb.cs156.courses.repositories.PersonalScheduleRepository;
+
+import org.json.*;
+import java.util.Scanner;
+import java.net.*;
+import java.io.InputStream;
 
 @Api(description = "Courses")
 @RequestMapping("/api/courses")
@@ -104,7 +110,7 @@ public class CoursesController extends ApiController {
     }
 
 
-    @ApiOperation(value = "Create a new course (user)")
+    @ApiOperation(value = "Create a new course")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
     public Courses postCourses(
