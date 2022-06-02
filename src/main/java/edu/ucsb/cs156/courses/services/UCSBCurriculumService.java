@@ -3,10 +3,8 @@ package edu.ucsb.cs156.courses.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.web.util.UriComponentsBuilder;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.documents.Course;
 import edu.ucsb.cs156.courses.documents.CourseInfo;
 import edu.ucsb.cs156.courses.documents.CoursePage;
 import edu.ucsb.cs156.courses.documents.Section;
-import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -96,7 +93,8 @@ public class UCSBCurriculumService {
         return retVal;
     }
 
-    public String getJSONbyQuarterAndEnroll(String quarter, String enrollCode) {
+  
+    public String getJSONbyQuarterAndEnroll(String quarter, String enrollCd) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -108,7 +106,7 @@ public class UCSBCurriculumService {
 
         String params = String.format(
                 "?quarter=%s&enrollCode=%s&pageNumber=%d&pageSize=%d&includeClassSections=true", quarter,
-                enrollCode, 1, 100);
+                enrollCd, 1, 100);
         String url = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + params;
 
         logger.info("url=" + url);
@@ -127,7 +125,7 @@ public class UCSBCurriculumService {
         logger.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
         return retVal;
     }
-    
+
     public List<ConvertedSection> getConvertedSections(String subjectArea, String quarter, String courseLevel)
             throws JsonProcessingException {
         String json = getJSON(subjectArea, quarter, courseLevel);
@@ -136,23 +134,15 @@ public class UCSBCurriculumService {
         return result;
     }
 
-    public List<CourseInfo> getConvertedSectionsByQuarterAndEnroll(String quarter, String enrollCode)
+
+    public List<CourseInfo> getConvertedSectionsByQuarterAndEnroll(String quarter, String enrollCd)
             throws JsonProcessingException {
-        String json = getJSONbyQuarterAndEnroll(quarter, enrollCode);
+        String json = getJSONbyQuarterAndEnroll(quarter, enrollCd);
         CoursePage coursePage = objectMapper.readValue(json, CoursePage.class);
         List<CourseInfo> result = coursePage.convertedSectionsInfo();       
         return result;
     }
 
-    public String getSectionJSON(String subjectArea, String quarter, String courseLevel)
-        throws JsonProcessingException {
-        List<ConvertedSection> l = getConvertedSections(subjectArea, quarter, courseLevel);
-        
-        String arrayToJson = objectMapper.writeValueAsString(l);
-    
-        return arrayToJson;
-    }
-    
     public String getSubjectsJSON() {
 
         HttpHeaders headers = new HttpHeaders();
@@ -178,6 +168,17 @@ public class UCSBCurriculumService {
         }
         logger.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
         return retVal;
+    }
+    
+    public static final String ENDPOINT = "https://api.ucsb.edu/academics/curriculums/v1/classsection";
+
+    public String getSectionJSON(String subjectArea, String quarter, String courseLevel)
+        throws JsonProcessingException {
+        List<ConvertedSection> l = getConvertedSections(subjectArea, quarter, courseLevel);
+        
+        String arrayToJson = objectMapper.writeValueAsString(l);
+    
+        return arrayToJson;
     }
 
     public String getSection(String enrollCode, String quarter) {
