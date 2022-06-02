@@ -54,8 +54,8 @@ public class SectionController extends ApiController {
 
         ArrayList<CourseInfo> convertedSections = new ArrayList<CourseInfo>();
         Iterable<Courses> courses = coursesRepository.findAllByPsId(psId);
-        for (Courses c: courses) {
-            List<CourseInfo> convertedSection = ucsbCurriculumService.getConvertedSectionsByQuarterAndEnroll(c.getQuarter(), c.getEnrollCd());
+        for (Courses cs: courses) {
+            List<CourseInfo> convertedSection = ucsbCurriculumService.getConvertedSectionsByQuarterAndEnroll(cs.getQuarter(), cs.getEnrollCd());
             convertedSections.addAll(convertedSection);
         }
 
