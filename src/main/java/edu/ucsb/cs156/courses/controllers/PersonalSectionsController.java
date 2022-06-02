@@ -62,31 +62,36 @@ public class PersonalSectionsController extends ApiController {
         
            // .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
         
+        //PersonalSchedule ps = personalScheduleRepository.findById(psId)
+         //       .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
+        User us = getCurrentUser().getUser();
+        PersonalSchedule ps = personalScheduleRepository.findByIdAndUser(psId,us)
+                .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
         ArrayList<Course> sections = new ArrayList<Course>();
         ArrayList<String> jsons = new ArrayList<String>();
-        Iterable<Courses> courses = coursesRepository.findAllByPsId(psId);
+        Iterable<Courses> courses = coursesRepository.findAllByPsId(psId); //.orElseThrow(() -> new EntityNotFoundException(Courses.class,"psId", psId ));
         //User u = courses.get(0).getUser();
         //PersonalSchedule ps = personalScheduleRepository.findByIdAndUser(psId, u);
         //String qtr = ps.getQuarter();
             //.orElseThrow(() -> new EntityNotFoundException(Courses.class, psId));;
         for (Courses crs:courses) {
-            try{
+            //try{
                 User u = crs.getUser();
-                PersonalSchedule ps = personalScheduleRepository.findByIdAndUser(psId,u)
-                .orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
+                //PersonalSchedule ps = personalScheduleRepository.findByIdAndUser(psId,u)
+                //.orElseThrow(() -> new EntityNotFoundException(PersonalSchedule.class, psId));
                 String qtr = ps.getQuarter();
                 String responseBody = ucsbCurriculumService.getJSONbyQtrEnrollCd(qtr, crs.getEnrollCd());
                 jsons.add(responseBody);
                 Course course = objectMapper.readValue(responseBody, Course.class);
                 sections.add(course);
-            }
+            /*}
             catch (Exception e){
                 System.out.println("Exception " + e);
-            }
+            }*/
         }
         return sections;
     }
-
+/*
 
     // in sachen's pull request
     @ApiOperation(value = "List all courses (admin)")
@@ -229,5 +234,5 @@ public class PersonalSectionsController extends ApiController {
         coursesRepository.save(courses);
 
         return courses;
-    }
+    }*/
 }
