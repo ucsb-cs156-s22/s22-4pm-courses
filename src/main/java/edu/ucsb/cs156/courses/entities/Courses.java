@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -28,4 +29,6 @@ public class Courses {
   private User user;
   private String enrollCd;
   private long psId;
+
 }
+
