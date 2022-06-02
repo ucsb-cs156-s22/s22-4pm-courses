@@ -74,7 +74,7 @@ public class SectionControllerTests extends ControllerTestCase {
 	    .thenReturn(convertedSections);
 
 
-        Courses p7 = Courses.builder().psId("7").enrollCd("77777").quarter("20223").id(0L).build();
+        Courses p7 = Courses.builder().psId(7).enrollCd("77777").quarter("20223").id(0L).build();
         ArrayList<Courses> expectedCourses = new ArrayList<>();
         expectedCourses.addAll(Arrays.asList(p7));
         when(coursesRepository.findAllByPsId(any(Long.class))).thenReturn(expectedCourses);
