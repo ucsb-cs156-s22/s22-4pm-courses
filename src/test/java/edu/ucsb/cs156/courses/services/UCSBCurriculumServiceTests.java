@@ -265,7 +265,7 @@ public class UCSBCurriculumServiceTests {
 
 
     @Test
-    public void test_getSectionsJSON_success() throws Exception {
+    public void test_getSectionJSON_success() throws Exception {
         String expectedResult = "[{\"quarter\": \"20223\", \"classSections\": [{\"enrollCode\": \"77777\"}]}]";
 
 
@@ -291,7 +291,7 @@ public class UCSBCurriculumServiceTests {
                 
 
     @Test
-    public void test_getSectionsJSON_exception() throws Exception {
+    public void test_getSectionJSON_exception() throws Exception {
         String expectedResult = "{\"error\": \"401: Unauthorized\"}";
 
         String quarter = "20223";
@@ -313,7 +313,7 @@ public class UCSBCurriculumServiceTests {
     }
 
     @Test
-    public void test_getSectionsJSON_DNE() throws Exception {
+    public void test_getSectionJSON_DNE() throws Exception {
 
         String expectedResult = "{\"error\": \"404 (Not Found): Enroll code does not exist!\"}";
         String quarter = "20223";
