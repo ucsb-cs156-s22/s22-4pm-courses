@@ -42,8 +42,8 @@ describe("Section tests", () => {
     );
 
 
-    const expectedHeaders = ["Quarter",  "Course ID", "Title", "Is Section?", "Enrolled", "Location", "Days", "Time", "Instructor", "Enroll Code"];
-    const expectedFields = ["quarter", "courseInfo.courseId", "courseInfo.title", "isSection", "enrolled", "location", "days", "time", "instructor", "section.enrollCode"];
+    const expectedHeaders = ["Quarter",  "Course ID", "Title", "Is Section?", "Section Number", "Enrolled", "Location", "Days", "Time", "Instructor", "Enroll Code"];
+    const expectedFields = ["quarter", "courseInfo.courseId", "courseInfo.title", "isSection", "sectionNumber", "enrolled", "location", "days", "time", "instructor", "section.enrollCode"];
     const testId = "SectionsTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -63,7 +63,8 @@ describe("Section tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-1-col-isSection`)).toHaveTextContent("No");
     expect(screen.getByTestId(`${testId}-cell-row-2-col-location`)).toHaveTextContent("HFH 1124");
     expect(screen.getByTestId(`${testId}-cell-row-2-col-instructor`)).toHaveTextContent("YUNG A S");
-
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-instructor`)).toHaveTextContent("YUNG A S");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-sectionNumber`)).toHaveTextContent("0101");
 
 
   });

@@ -57,3 +57,8 @@ export const formatInstructors = (instructorArray) => {
 export const isSectionAsString = (en1) => {
     return (en1.substring(2) !== "00") ? "Yes" : "No";
 }
+
+// Takes section number array and returns the sections
+export const sectionNumber = (en1) => {
+    return (en1 != null) ? `${en1}` : "N/A";
+}

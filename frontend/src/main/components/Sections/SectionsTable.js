@@ -1,7 +1,7 @@
 import OurTable from "main/components/OurTable";
 
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
-import { convertToFraction, formatDays, formatInstructors, formatLocation, formatTime, isSectionAsString } from "main/utils/sectionUtils.js";
+import { convertToFraction, formatDays, formatInstructors, formatLocation, formatTime, isSectionAsString, sectionNumber } from "main/utils/sectionUtils.js";
 
 export default function SectionsTable({ sections }) {
 
@@ -26,6 +26,11 @@ export default function SectionsTable({ sections }) {
             Header: 'Is Section?',
             accessor: (row) => isSectionAsString(row.section.section),
             id: 'isSection',
+        },
+        {
+            Header: 'Section Number',
+            accessor: (row) => sectionNumber(row.section.section),
+            id: 'sectionNumber'
         },
         {
             Header: 'Enrolled',
