@@ -1,5 +1,6 @@
 package edu.ucsb.cs156.courses.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -174,7 +175,13 @@ public class UCSBCurriculumService {
             statusCode = re.getStatusCode();
             retVal = re.getBody();
         } catch (HttpClientErrorException e) {
-            retVal = "{\"error\": \"401: Unauthorized\"}";
+            if(!quarter.matches("\\d{4}[1-4]") ){
+                retVal = "{\"error\": \"Quarter must be in YYYYQ format.\"}";
+            }
+            else{
+                retVal = "{\"error\": \"401: Unauthorized\"}";
+            }
+            
         }
 
         if(retVal.equals("null")){
