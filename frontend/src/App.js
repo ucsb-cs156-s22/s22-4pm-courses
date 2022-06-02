@@ -41,13 +41,9 @@ function App() {
             </>
           )
         }
-        {
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/sectionsearches/search" element={<SectionSearchesIndexPage />} />
-            </>
-          )
-        }
+       
+        <Route exact path="/sectionsearches/search" element={<SectionSearchesIndexPage />} />
+
       </Routes>
     </BrowserRouter>
   );
