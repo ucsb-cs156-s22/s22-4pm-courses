@@ -195,7 +195,7 @@ public class UCSBCurriculumService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("ucsb-api-version", "1.0");
-        headers.set("ucsb-api-key", "vb8mlvnaJeqYiAGXP1qa5INS4noghlAR");
+        headers.set("ucsb-api-key", this.apiKey);
 
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
 
