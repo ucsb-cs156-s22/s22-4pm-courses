@@ -4,7 +4,9 @@ import edu.ucsb.cs156.courses.documents.Course;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
 import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.testconfig.TestConfig;
+import edu.ucsb.cs156.courses.errors.EntityNotFoundException;
 //import edu.ucsb.cs156.courses.testconfig.SecurityConfig;
+import edu.ucsb.cs156.courses.documents.PersonalSectionsFixtures;
 import edu.ucsb.cs156.courses.ControllerTestCase;
 import edu.ucsb.cs156.courses.entities.PersonalSchedule;
 import edu.ucsb.cs156.courses.entities.Courses;
@@ -28,10 +30,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
+import java.lang.Iterable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -68,6 +74,9 @@ public class PersonalSectionsControllerTests extends ControllerTestCase {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     // Authorization tests for /api/personalschedules/admin/psid/sections/all
 
     @Test
@@ -76,31 +85,64 @@ public class PersonalSectionsControllerTests extends ControllerTestCase {
                 .andExpect(status().is(403));
     }
 
-    @WithMockUser(roles = { "USER" })
+    /*@WithMockUser(roles = { "USER" })
     @Test
     public void api_psid_sections__user_logged_in__returns_200() throws Exception {
         mockMvc.perform(get("/api/personalSections/all?psId=1"))
                 .andExpect(status().is(200));
+        
+        
+    }*/
+
+    @WithMockUser(roles = { "USER" })
+    @Test
+    public void api_psid_sections__user_logged_in__no_personal_schedule() throws Exception {
+        /*Exception exception = assertThrows(EntityNotFoundException.class, () -> {
+        mockMvc.perform(get("/api/personalSections/all?psId=13"))
+                .andExpect(status().isOk()).andReturn();
+        });*/
+        MvcResult response = mockMvc.perform(get("/api/personalSections/all?psId=13"))
+                .andExpect(status().is(404)).andReturn();
+        String actual = response.getResponse().getContentAsString();
+        String expectedResponse = "{\"message\":\"PersonalSchedule with id 13 not found\",\"type\":\"EntityNotFoundException\"}";
+        //String expectedResponse = "{\"type\":\"EntityNotFoundException\",\"message\":\"PersonalSchedule with id 13 not found\"}";
+        assertEquals(expectedResponse, actual);
+        
     }
+
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void api_psid_sections__user_logged_in__returns_existing_course() throws Exception {
+        // arrange
         User u = currentUserService.getCurrentUser().getUser();
-        PersonalSchedule ps1 = PersonalSchedule.builder().name("Name 1").description("Description 1").quarter("20221").user(u).id(13L)
+        PersonalSchedule ps = PersonalSchedule.builder().name("Name 1").description("Description 1").quarter("20221").user(u).id(13L)
                 .build();
-        String expectedString = ucsbCurriculumService.getJSONbyQtrEnrollCd("20221", "59501");
-        //System.out.print("expected: " + expectedString);
-        
-        Courses crs = Courses.builder().id(1L).user(u).enrollCd("59501").psId(13L).build();
-        //mockMvc.perform(get("/api/personalSections/all?psId=1"))
-        //    .andExpect(status().is(200));
+        Courses course1 = Courses.builder().id(1L).user(u).enrollCd("59501").psId(13L).build();
+        //String crsInfo = ucsbCurriculumService.getJSONbyQtrEnrollCd("20221", "59501");
+        //Course course = objectMapper.readValue(crsInfo, Courses.class);
+        Course course = objectMapper.readValue(PersonalSectionsFixtures.ONE_COURSE, Course.class);
+        ArrayList<Courses> crs = new ArrayList<Courses>();
+        crs.add(course1);
 
-        MvcResult response = mockMvc.perform(get("/api/personalSections/all?psId=13").contentType("application/json")).andExpect(status().isOk())
-            .andReturn();
+        //when((coursesRepository.findAllByPsId(eq(1L)).iterator()).thenReturn(crs));
+        when(personalscheduleRepository.findByIdAndUser(eq(13L), eq(u))).thenReturn(Optional.of(ps));
+        when((coursesRepository.findAllByPsId(eq(13L)))).thenReturn(crs);
+        when(ucsbCurriculumService.getJSONbyQtrEnrollCd(eq("20221"),eq("59501")))
+                .thenReturn(PersonalSectionsFixtures.ONE_COURSE);
+
+
+        // act
+        MvcResult response = mockMvc.perform(get("/api/personalSections/all?psId=13"))
+                .andExpect(status().isOk()).andReturn();
+
+        // assert
+        verify(coursesRepository, times(1)).findAllByPsId(13L);
+        verify(ucsbCurriculumService, times(1)).getJSONbyQtrEnrollCd("20221","59501");
+        String expectedJson = mapper.writeValueAsString(course);
+        expectedJson = "[" + expectedJson + "]";
         String responseString = response.getResponse().getContentAsString();
-        //System.out.print(responseString);
-        assertEquals(responseString,expectedString);
+        assertEquals(expectedJson, responseString);
     }
     
 
