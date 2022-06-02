@@ -556,4 +556,6 @@ public class PersonalSchedulesControllerTests extends ControllerTestCase {
         assertEquals("PersonalSchedule with id 77 not found", json.get("message"));
     }
 
+
+
 }
