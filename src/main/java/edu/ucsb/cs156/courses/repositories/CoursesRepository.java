@@ -18,4 +18,3 @@ public interface CoursesRepository extends CrudRepository<Courses, Long> {
   Iterable<Courses> findAllByPsIdAndUser(Long psId, User user);
   Iterable<Courses> findAllByUserId(Long user_id);
 }
-
