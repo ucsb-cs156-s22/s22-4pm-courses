@@ -56,12 +56,13 @@ public class SectionControllerTests extends ControllerTestCase {
                 .andExpect(status().is(200));
     }
 
-
+public class CoursePageFixtures {
+    
     @WithMockUser(roles = { "USER" })
     @Test
     public void test_section_search() throws Exception {
 
-        CoursePage cp = CoursePage.fromJSON(CoursePageFixtures.COURSE_PAGE_JSON_MATH3B);
+        
         List<CourseInfo> convertedSections = cp.convertedSectionsInfo();
         List<CourseInfo> empty = new ArrayList<CourseInfo>();
         assertNotEquals(empty, convertedSections);
