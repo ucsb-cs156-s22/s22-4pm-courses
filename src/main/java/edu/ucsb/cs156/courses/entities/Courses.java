@@ -22,13 +22,7 @@ public class Courses {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private String enrollCd;
-  private String psId;
-  private String quarter;
-
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
-  private String enrollCd;
   private long psId;
+  private String enrollCd;
+  private String quarter;
 }
