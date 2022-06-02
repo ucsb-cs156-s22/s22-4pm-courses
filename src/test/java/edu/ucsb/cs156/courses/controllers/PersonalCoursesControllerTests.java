@@ -66,44 +66,16 @@ public class PersonalCoursesControllerTests extends ControllerTestCase {
     @WithMockUser(roles = { "ADMIN" })
     @Test
     public void api_psid_sections_admin__user_logged_in__returns_a_course_that_exists() throws Exception {
-        // arrange
         User u = currentUserService.getCurrentUser().getUser();
         PersonalSchedule personalschedule1 = PersonalSchedule.builder().name("Name 1").description("Description 1").quarter("20221").user(u).id(1L).build();
         when(personalscheduleRepository.findByIdAndUser(eq(1L), eq(u))).thenReturn(Optional.of(personalschedule1));
         Courses course1 = Courses.builder().id(1L).user(u).enrollCd("59501").psId(1L).build();
         when(coursesRepository.findByIdAndUser(eq(1L), eq(u))).thenReturn(Optional.of(course1));
-        // act
         MvcResult response = mockMvc.perform(get("/api/courses/admin/psid/sections/all?psId=1"))
                 .andExpect(status().isOk()).andReturn();
-        //MvcResult response = mockMvc.perform(get("/api/courses/admin/psid/sections/all?psId=1"))
-        //        .andExpect(status().isOk()).andReturn();
-        // assert
         verify(personalscheduleRepository, times(1)).findByIdAndUser(1L, u);
         verify(coursesRepository, times(1)).findByIdAndUser(1L, u);
         
-        //Course course = objectMapper.readValue(responseBody, Course.class);
-        //String expectedJson = 
-
-
-
-
-        /*
-        // arrange
-
-        User u = currentUserService.getCurrentUser().getUser();
-        PersonalSchedule personalschedule1 = PersonalSchedule.builder().name("Name 1").description("Description 1").quarter("20221").user(u).id(7L).build();
-        when(personalscheduleRepository.findByIdAndUser(eq(7L), eq(u))).thenReturn(Optional.of(personalschedule1));
-
-        // act
-        MvcResult response = mockMvc.perform(get("/api/personalschedules?id=7"))
-                .andExpect(status().isOk()).andReturn();
-
-        // assert
-
-        verify(personalscheduleRepository, times(1)).findByIdAndUser(7L, u);
-        String expectedJson = mapper.writeValueAsString(personalschedule1);
-        String responseString = response.getResponse().getContentAsString();
-        assertEquals(expectedJson, responseString);*/
     }
 
 }
