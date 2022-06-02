@@ -96,11 +96,51 @@ public class UCSBCurriculumService {
         return retVal;
     }
 
+    public String getJSONbyQuarterAndEnroll(String quarter, String enrollCode) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("ucsb-api-version", "3.0");
+        headers.set("ucsb-api-key", this.apiKey);
+
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        String params = String.format(
+                "?quarter=%s&enrollCode=%s&pageNumber=%d&pageSize=%d&includeClassSections=true", quarter,
+                enrollCode, 1, 100);
+        String url = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + params;
+
+        logger.info("url=" + url);
+
+        String retVal = "";
+        MediaType contentType = null;
+        HttpStatus statusCode = null;
+        try {
+            ResponseEntity<String> re = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            contentType = re.getHeaders().getContentType();
+            statusCode = re.getStatusCode();
+            retVal = re.getBody();
+        } catch (HttpClientErrorException e) {
+            retVal = "{\"error\": \"401: Unauthorized\"}";
+        }
+        logger.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
+        return retVal;
+    }
+    
     public List<ConvertedSection> getConvertedSections(String subjectArea, String quarter, String courseLevel)
             throws JsonProcessingException {
         String json = getJSON(subjectArea, quarter, courseLevel);
         CoursePage coursePage = objectMapper.readValue(json, CoursePage.class);
         List<ConvertedSection> result = coursePage.convertedSections();       
+        return result;
+    }
+
+    public List<CourseInfo> getConvertedSectionsByQuarterAndEnroll(String quarter, String enrollCode)
+            throws JsonProcessingException {
+        String json = getJSONbyQuarterAndEnroll(quarter, enrollCode);
+        CoursePage coursePage = objectMapper.readValue(json, CoursePage.class);
+        List<CourseInfo> result = coursePage.convertedSectionsInfo();       
         return result;
     }
 
