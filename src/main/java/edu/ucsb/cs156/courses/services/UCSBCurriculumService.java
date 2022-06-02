@@ -180,6 +180,41 @@ public class UCSBCurriculumService {
     
         return arrayToJson;
     }
+    public String getSectionsJSON(String quarter, String enrollCode) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("ucsb-api-version", "1.0");
+        headers.set("ucsb-api-key", this.apiKey);
+
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        String params = String.format(
+            "/%s/%s", quarter, enrollCode);
+        String url = ENDPOINT + params;
+
+        logger.info("url=" + url);
+
+        String retVal = "";
+        MediaType contentType=null;
+        HttpStatus statusCode=null;
+        try {
+            ResponseEntity<String> re = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            contentType = re.getHeaders().getContentType();
+            statusCode = re.getStatusCode();
+            retVal = re.getBody();
+           
+        } catch (HttpClientErrorException e) {
+            retVal = "{\"error\": \"401: Unauthorized\"}";
+        }
+        if(retVal.equals("null")){
+            retVal = "{\"error\": \"404 (Not Found): Enroll code does not exist!\"}";
+        }
+
+        logger.info("json: {} contentType: {} statusCode: {}",retVal,contentType,statusCode);
+        return retVal;
+    }
 
     public String getSection(String enrollCode, String quarter) {
 

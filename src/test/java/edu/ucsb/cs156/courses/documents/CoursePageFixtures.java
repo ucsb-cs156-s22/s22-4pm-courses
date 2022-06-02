@@ -2,6 +2,134 @@ package edu.ucsb.cs156.courses.documents;
 
 public class CoursePageFixtures {
 
+        public static final String CS777original = """
+          {
+                       "pageNumber": 1,
+                       "pageSize": 10,
+                       "total": 1,
+                       "classes": [
+            {
+              "quarter": "20222",
+              "courseId": "CMPSC   777E ",
+              "title": "SPEC TOP SYS ARCH",
+              "contactHours": 30,
+              "description": "These courses provide for the study of topics of current interest in computer   science systems.",
+              "college": "ENGR",
+              "objLevelCode": "G",
+              "subjectArea": "CMPSC   ",
+              "unitsFixed": 4,
+              "unitsVariableHigh": null,
+              "unitsVariableLow": null,
+              "delayedSectioning": null,
+              "inProgressCourse": null,
+              "gradingOption": "L",
+              "instructionType": "LEC",
+              "onLineCourse": false,
+              "deptCode": "CMPSC",
+              "generalEducation": [],
+              "classSections": [
+                {
+                  "enrollCode": "77777",
+                  "section": "0100",
+                  "session": null,
+                  "classClosed": "Y",
+                  "courseCancelled": null,
+                  "gradingOptionCode": null,
+                  "enrolledTotal": 23,
+                  "maxEnroll": 35,
+                  "secondaryStatus": null,
+                  "departmentApprovalRequired": false,
+                  "instructorApprovalRequired": false,
+                  "restrictionLevel": null,
+                  "restrictionMajor": "+CMPSC",
+                  "restrictionMajorPass": null,
+                  "restrictionMinor": null,
+                  "restrictionMinorPass": null,
+                  "concurrentCourses": [],
+                  "timeLocations": [
+                    {
+                      "room": "3526",
+                      "building": "PHELP",
+                      "roomCapacity": null,
+                      "days": "M W    ",
+                      "beginTime": "11:00",
+                      "endTime": "12:50"
+                    }
+                  ],
+                  "instructors": [
+                    {
+                      "instructor": "SHERWOOD T P",
+                      "functionCode": "Teaching and in charge"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+    """;
+    public static final String CS777 = """
+          [
+            {
+              "quarter": "20222",
+              "courseId": "CMPSC   777E ",
+              "title": "SPEC TOP SYS ARCH",
+              "contactHours": 30,
+              "description": "These courses provide for the study of topics of current interest in computer   science systems.",
+              "college": "ENGR",
+              "objLevelCode": "G",
+              "subjectArea": "CMPSC   ",
+              "unitsFixed": 4,
+              "unitsVariableHigh": null,
+              "unitsVariableLow": null,
+              "delayedSectioning": null,
+              "inProgressCourse": null,
+              "gradingOption": "L",
+              "instructionType": "LEC",
+              "onLineCourse": false,
+              "deptCode": "CMPSC",
+              "generalEducation": [],
+              "classSections": [
+                {
+                  "enrollCode": "77777",
+                  "section": "0100",
+                  "session": null,
+                  "classClosed": "Y",
+                  "courseCancelled": null,
+                  "gradingOptionCode": null,
+                  "enrolledTotal": 23,
+                  "maxEnroll": 35,
+                  "secondaryStatus": null,
+                  "departmentApprovalRequired": false,
+                  "instructorApprovalRequired": false,
+                  "restrictionLevel": null,
+                  "restrictionMajor": "+CMPSC",
+                  "restrictionMajorPass": null,
+                  "restrictionMinor": null,
+                  "restrictionMinorPass": null,
+                  "concurrentCourses": [],
+                  "timeLocations": [
+                    {
+                      "room": "3526",
+                      "building": "PHELP",
+                      "roomCapacity": null,
+                      "days": "M W    ",
+                      "beginTime": "11:00",
+                      "endTime": "12:50"
+                    }
+                  ],
+                  "instructors": [
+                    {
+                      "instructor": "SHERWOOD T P",
+                      "functionCode": "Teaching and in charge"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+    """;
+
     public static final String COURSE_PAGE_JSON_MATH3B = """
                    {
                        "pageNumber": 1,
