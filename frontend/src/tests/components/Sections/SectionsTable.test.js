@@ -98,14 +98,14 @@ describe("Section tests", () => {
         expect(header).toBeInTheDocument();
       });
       expect(screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`)).toHaveTextContent("ECE 1A");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.title`)).toHaveTextContent("COMP ENGR SEMINAR");
+      expect(screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`)).toHaveTextContent("12583");
+      expect(screen.getByTestId(`${testId}-cell-row-0-col-sectionNumber`)).toHaveTextContent("0100");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-quarter`)).toHaveTextContent("W22");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-time`)).toHaveTextContent("3:00 PM - 3:50 PM");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-days`)).toHaveTextContent("M");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-enrolled`)).toHaveTextContent("84/100");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-location`)).toHaveTextContent("BUCHN 1930");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-instructor`)).toHaveTextContent("WANG L C");
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`)).toHaveTextContent("12583");
       
 
   });
