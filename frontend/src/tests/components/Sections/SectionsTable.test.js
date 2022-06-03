@@ -98,6 +98,7 @@ describe("Section tests", () => {
         expect(header).toBeInTheDocument();
       });
       expect(screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.courseId`)).toHaveTextContent("ECE 1A");
+      expect(screen.getByTestId(`${testId}-cell-row-0-col-courseInfo.title`)).toHaveTextContent("COMP ENGR SEMINAR");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-section.enrollCode`)).toHaveTextContent("12583");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-sectionNumber`)).toHaveTextContent("0100");
       expect(screen.getByTestId(`${testId}-cell-row-0-col-quarter`)).toHaveTextContent("W22");
