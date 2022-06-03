@@ -283,7 +283,7 @@ public class UCSBCurriculumServiceTests {
                 .andExpect(header("ucsb-api-key", apiKey))
                 .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
 
-        String result = ucs.getSectionsJSON(quarter, enrollCode);
+        String result = ucs.getSection(enrollCode, quarter);
         
         assertEquals(expectedResult, result);
     }
@@ -308,14 +308,14 @@ public class UCSBCurriculumServiceTests {
                 .andExpect(header("ucsb-api-key", apiKey))
                 .andRespond(withUnauthorizedRequest());
 
-        String result = ucs.getSectionsJSON(quarter, enrollCode);
+        String result = ucs.getSection(enrollCode, quarter);
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void test_getSectionJSON_DNE() throws Exception {
 
-        String expectedResult = "{\"error\": \"404 (Not Found): Enroll code does not exist!\"}";
+        String expectedResult = "{\"error\": \"Enroll code doesn't exist in that quarter.\"}";
         String quarter = "20223";
         String enrollCode = "00000";
 
@@ -330,7 +330,7 @@ public class UCSBCurriculumServiceTests {
                 .andExpect(header("ucsb-api-key", apiKey))
                 .andRespond(withSuccess("null", MediaType.APPLICATION_JSON));
 
-        String result = ucs.getSectionsJSON(quarter, enrollCode);
+        String result = ucs.getSection(enrollCode, quarter);
         assertEquals(expectedResult, result);
     }
 
