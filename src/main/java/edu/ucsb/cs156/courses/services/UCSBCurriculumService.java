@@ -1,6 +1,5 @@
 package edu.ucsb.cs156.courses.services;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
