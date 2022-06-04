@@ -665,7 +665,7 @@ public class CoursePageFixtures {
         [ {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -703,7 +703,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -741,7 +741,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -779,7 +779,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -817,7 +817,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -855,7 +855,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -893,7 +893,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -1",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -931,7 +931,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -969,7 +969,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -1007,7 +1007,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -1045,7 +1045,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -1083,7 +1083,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -1121,7 +1121,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
@@ -1159,7 +1159,7 @@ public class CoursePageFixtures {
           }, {
             "courseInfo" : {
               "quarter" : "20222",
-              "courseId" : "MATH      3B ",
+              "courseId" : "MATH      3B -2",
               "title" : "CALC WITH APPLI 2",
               "description" : "Integral calculus including definite and indefinite integrals, techniques o f integration; introduction to sequences and series; with applications in m athematics and physics."
             },
