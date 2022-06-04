@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import CourseForm from "main/components/Courses/CourseForm";
-import { coursesFixtures } from "fixtures/coursesFixtures";
+import { pscourseFixtures } from "fixtures/pscourseFixtures";
 
 const mockedNavigate = jest.fn();
 
@@ -27,7 +27,7 @@ describe("CourseForm tests", () => {
     test("renders correctly when passing in a Course", async () => {
         render(
             <Router>
-                <CourseForm initialCourse={coursesFixtures.oneCourse} />
+                <CourseForm initialCourse={pscourseFixtures.oneCourse} />
             </Router>
         );
 

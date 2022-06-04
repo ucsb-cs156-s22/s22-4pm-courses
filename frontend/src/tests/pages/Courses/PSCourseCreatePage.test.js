@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import CoursesCreatePage from "main/pages/Courses/CoursesCreatePage";
+import PSCourseCreatePage from "main/pages/Courses/PSCourseCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -44,7 +44,7 @@ describe("CoursesCreatePage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesCreatePage />
+                    <PSCourseCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -64,7 +64,7 @@ describe("CoursesCreatePage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesCreatePage />
+                    <PSCourseCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         );

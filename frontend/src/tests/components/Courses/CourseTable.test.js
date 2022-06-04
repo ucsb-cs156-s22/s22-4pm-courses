@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import CourseTable from "main/components/Courses/CourseTable";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import { coursesFixtures } from "fixtures/coursesFixtures";
+import { pscourseFixtures } from "fixtures/pscourseFixtures";
 
 const mockedNavigate = jest.fn();
 
@@ -66,7 +66,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseTable courses={coursesFixtures.twoCourses} currentUser={currentUser} />
+          <CourseTable courses={pscourseFixtures.twoCourses} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -101,7 +101,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseTable courses={coursesFixtures.twoCourses} currentUser={currentUser} />
+          <CourseTable courses={pscourseFixtures.twoCourses} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -135,7 +135,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseTable courses={coursesFixtures.twoCourses} currentUser={currentUser} />
+          <CourseTable courses={pscourseFixtures.twoCourses} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -157,7 +157,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CourseTable courses={coursesFixtures.twoCourses} currentUser={currentUser} />
+          <CourseTable courses={pscourseFixtures.twoCourses} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );

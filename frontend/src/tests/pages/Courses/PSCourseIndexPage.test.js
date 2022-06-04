@@ -5,10 +5,10 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "jest-mock-console";
 
-import CoursesIndexPage from "main/pages/Courses/CoursesIndexPage";
+import PSCourseIndexPage from "main/pages/Courses/PSCourseIndexPage";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { coursesFixtures } from "fixtures/coursesFixtures";
+import { pscourseFixtures } from "fixtures/pscourseFixtures";
 
 
 
@@ -22,7 +22,7 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("CoursesIndexPage tests", () => {
+describe("PSCourseIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
@@ -50,7 +50,7 @@ describe("CoursesIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -66,7 +66,7 @@ describe("CoursesIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -77,12 +77,12 @@ describe("CoursesIndexPage tests", () => {
     test("renders two courses without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/courses/user/all").reply(200, coursesFixtures.twoCourses);
+        axiosMock.onGet("/api/courses/user/all").reply(200, pscourseFixtures.twoCourses);
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -95,12 +95,12 @@ describe("CoursesIndexPage tests", () => {
     test("renders two courses without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/courses/user/all").reply(200, coursesFixtures.twoCourses);
+        axiosMock.onGet("/api/courses/user/all").reply(200, pscourseFixtures.twoCourses);
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -121,7 +121,7 @@ describe("CoursesIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -138,13 +138,13 @@ describe("CoursesIndexPage tests", () => {
     test("what happens when you click delete, admin", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/courses/user/all").reply(200, coursesFixtures.twoCourses);
-        axiosMock.onDelete("/api/courses/user").reply(200, "Course with id 25 was deleted");
+        axiosMock.onGet("/api/courses/user/all").reply(200, pscourseFixtures.twoCourses);
+        axiosMock.onDelete("/api/courses/user").reply(200, "PSCourse with id 25 was deleted");
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <CoursesIndexPage />
+                    <PSCourseIndexPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -157,7 +157,7 @@ describe("CoursesIndexPage tests", () => {
 
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("Course with id 25 was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("PSCourse with id 25 was deleted") });
 
     });
  

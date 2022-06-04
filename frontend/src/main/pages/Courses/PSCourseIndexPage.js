@@ -5,7 +5,7 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import CourseTable from 'main/components/Courses/CourseTable';
 import { useCurrentUser } from 'main/utils/currentUser'
 
-export default function CoursesIndexPage() {
+export default function PSCourseIndexPage() {
 
     const currentUser = useCurrentUser();
 

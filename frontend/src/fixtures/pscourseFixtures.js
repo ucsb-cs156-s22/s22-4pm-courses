@@ -1,4 +1,4 @@
-const coursesFixtures = {
+const pscourseFixtures = {
     twoCourses:
       [
         {
@@ -19,4 +19,4 @@ const coursesFixtures = {
     }
   }
   
-  export { coursesFixtures };
+  export { pscourseFixtures };
