@@ -6,7 +6,7 @@ import edu.ucsb.cs156.courses.entities.User;
 import edu.ucsb.cs156.courses.errors.EntityNotFoundException;
 import edu.ucsb.cs156.courses.models.CurrentUser;
 import edu.ucsb.cs156.courses.repositories.PersonalScheduleRepository;
-import edu.ucsb.cs156.courses.repositories.CoursesRepository;
+import edu.ucsb.cs156.courses.repositories.PSCourseRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import io.swagger.annotations.Api;
@@ -40,7 +40,7 @@ public class PersonalSchedulesController extends ApiController {
 
     @Autowired
     PersonalScheduleRepository personalscheduleRepository;
-    CoursesRepository coursesRepository;
+    PSCourseRepository pscourseRepository;
     UCSBCurriculumService ucsbCurriculumService;
     @ApiOperation(value = "List all personal schedules")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
