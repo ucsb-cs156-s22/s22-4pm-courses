@@ -6,7 +6,7 @@ import edu.ucsb.cs156.courses.entities.PSCourse;
 import edu.ucsb.cs156.courses.entities.User;
 import edu.ucsb.cs156.courses.errors.EntityNotFoundException;
 import edu.ucsb.cs156.courses.models.CurrentUser;
-import edu.ucsb.cs156.courses.repositories.CoursesRepository;
+import edu.ucsb.cs156.courses.repositories.PSCourseRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.documents.CourseInfo;
@@ -40,7 +40,7 @@ import java.util.Optional;
 public class SectionController extends ApiController {
 
     @Autowired
-    CoursesRepository coursesRepository;
+    PSCourseRepository pscourseRepository;
 
     @Autowired
     UCSBCurriculumService ucsbCurriculumService;
@@ -53,9 +53,9 @@ public class SectionController extends ApiController {
           @ApiParam("personal schedule id") @RequestParam Long psId) throws JsonProcessingException {
 
         ArrayList<CourseInfo> convertedSections = new ArrayList<CourseInfo>();
-        Iterable<Courses> courses = coursesRepository.findAllByPsId(psId);
-        for (Courses cs: courses) {
-            List<CourseInfo> convertedSection = ucsbCurriculumService.getConvertedSectionsByQuarterAndEnroll(cs.getQuarter(), cs.getEnrollCd());
+        Iterable<PSCourse> pscourse = pscourseRepository.findAllByPsId(psId);
+        for (PSCourse pc: pscourse) {
+            List<CourseInfo> convertedSection = ucsbCurriculumService.getConvertedSectionsByQuarterAndEnroll(pc.getQuarter(), pc.getEnrollCd());
             convertedSections.addAll(convertedSection);
         }
 
