@@ -19,13 +19,13 @@ import lombok.Builder;
 @Builder
 @Entity(name = "courses")
 public class PSCourse {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-
-  @ManyToOne
-  @JoinColumn(name = "user_id")
-  private User user;
-  private String enrollCd;
-  private long psId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String enrollCd;
+    private long psId;
+    private String quarter;
 }

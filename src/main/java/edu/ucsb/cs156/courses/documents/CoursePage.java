@@ -77,4 +77,34 @@ public class CoursePage {
         return result;
     }
 
+    public List<CourseInfo> convertedSectionsInfo() {
+
+	List<CourseInfo> result = new ArrayList<CourseInfo>();
+
+	for (Course c : this.getClasses()) {
+	    for (Section section : c.getClassSections()) {
+		CourseInfo courseInfo = CourseInfo.builder()
+                        .quarter(c.getQuarter())
+                        .courseId(c.getCourseId())
+                        .title(c.getTitle())
+                        .contactHours(c.getContactHours())
+                        .description(c.getDescription())
+                        .college(c.getCollege())
+                        .objLevelCode(c.getObjLevelCode())
+                        .subjectArea(c.getSubjectArea())
+                        .unitsFixed(c.getUnitsFixed())
+                        .unitsVariableHigh(c.getUnitsVariableHigh())
+                        .unitsVariableLow(c.getUnitsVariableLow())
+                        .gradingOption(c.getGradingOption())
+                        .instructionType(c.getInstructionType())
+                        .deptCode(c.getDeptCode())
+                        .generalEducation(c.getGeneralEducation())
+                        .classSections(c.getClassSections())
+                        .build();
+                result.add(courseInfo);
+
+            }
+        }
+        return result;
+    }
 }

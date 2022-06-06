@@ -23,8 +23,20 @@ public class Course {
     private String quarter;
     private String courseId;
     private String title;
+    private int contactHours;
     private String description;
-    private List<Section> classSections;
+    private String college;
+    private String objLevelCode;
+    private String subjectArea;
+    private int unitsFixed;
+    private int unitsVariableHigh;
+    private int unitsVariableLow;
+    private boolean delayedSectioning;
+    private boolean inProgressCourse;
+    private String gradingOption;
+    private String instructionType;
+    private boolean onLineCourse;
+    private String deptCode;
     private List<GeneralEducation> generalEducation;
-    private FinalExam finalExam;
+    private List<Section> classSections;
 }
