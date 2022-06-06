@@ -40,7 +40,7 @@ public class SectionControllerTests extends ControllerTestCase {
     @MockBean
     CoursesRepository coursesRepository;
 
-     @MockBean
+    @MockBean
     UserRepository userRepository;
 
     @Autowired
