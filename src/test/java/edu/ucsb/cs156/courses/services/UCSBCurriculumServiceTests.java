@@ -95,6 +95,56 @@ public class UCSBCurriculumServiceTests {
     }
 
     @Test
+    public void test_getJSONbyQuarterAndEnroll_success() throws Exception {
+        String expectedResult = "{expectedResult}";
+
+        String quarter = "20223";
+        String enrollCd = "77777";
+
+        String expectedParams = String.format(
+                "?quarter=%s&enrollCode=%s&pageNumber=%d&pageSize=%d&includeClassSections=true", quarter,
+                enrollCd, 1, 100);
+        String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + expectedParams;
+	this.mockRestServiceServer.expect(requestTo(expectedURL))
+	    .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+            .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+            .andExpect(header("ucsb-api-version", "3.0"))
+            .andExpect(header("ucsb-api-key", apiKey))
+            .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
+
+        String result = ucs.getJSONbyQuarterAndEnroll(quarter, enrollCd);
+
+        assertEquals(expectedResult, result);
+    }
+
+     @Test
+     public void test_getJSONbyQuarterAndEnroll_exception() throws Exception {
+	 String expectedResult = "{\"error\": \"401: Unauthorized\"}";
+
+	 when(restTemplate.exchange(any(String.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)))
+                .thenThrow(HttpClientErrorException.class);
+
+	 String quarter = "20222";
+         String enrollCd = "07864";
+
+         String expectedParams = String.format(
+					       "?quarter=%s&enrollCode=%s&pageNumber=%d&pageSize=%d&includeClassSections=true", quarter,
+					       enrollCd, 1, 100);
+         String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + expectedParams;
+
+         this.mockRestServiceServer.expect(requestTo(expectedURL))
+	     .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+             .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+             .andExpect(header("ucsb-api-version", "3.0"))
+             .andExpect(header("ucsb-api-key", apiKey))
+             .andRespond(withUnauthorizedRequest());
+
+        String result = ucs.getJSONbyQuarterAndEnroll(quarter, enrollCd);
+
+        assertEquals(expectedResult, result);
+    }
+    
+    @Test
     public void test_getJSON_success_level_A() throws Exception {
         String expectedResult = "{expectedResult}";
 
