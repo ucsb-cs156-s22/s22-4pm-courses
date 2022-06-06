@@ -7,7 +7,7 @@ import edu.ucsb.cs156.courses.documents.CoursePage;
 import edu.ucsb.cs156.courses.documents.CoursePageFixtures;
 import edu.ucsb.cs156.courses.documents.ConvertedSection;
 import edu.ucsb.cs156.courses.entities.PSCourse;
-import edu.ucsb.cs156.courses.repositories.CoursesRepository;
+import edu.ucsb.cs156.courses.repositories.PSCourseRepository;
 import edu.ucsb.cs156.courses.repositories.UserRepository;
 import edu.ucsb.cs156.courses.services.UCSBCurriculumService;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class SectionControllerTests extends ControllerTestCase {
     private ObjectMapper mapper = new ObjectMapper();
 
     @MockBean
-    CoursesRepository coursesRepository;
+    PSCourseRepository pscourseRepository;
 
     @MockBean
     UserRepository userRepository;
@@ -74,10 +74,10 @@ public class SectionControllerTests extends ControllerTestCase {
 	    .thenReturn(convertedSections);
 
 
-        Courses p7 = Courses.builder().psId(7).enrollCd("77777").quarter("20223").id(0L).build();
-        ArrayList<Courses> expectedCourses = new ArrayList<>();
-        expectedCourses.addAll(Arrays.asList(p7));
-        when(coursesRepository.findAllByPsId(any(Long.class))).thenReturn(expectedCourses);
+        PSCourse p7 = PSCourse.builder().psId(7).enrollCd("77777").quarter("20223").id(0L).build();
+        ArrayList<PSCourse> expectedPSCourse = new ArrayList<>();
+        expectedPSCourse.addAll(Arrays.asList(p7));
+        when(pscourseRepository.findAllByPsId(any(Long.class))).thenReturn(expectedPSCourse);
 
 
         MvcResult response = mockMvc.perform(get(url).contentType("application/json")).andExpect(status().isOk())
