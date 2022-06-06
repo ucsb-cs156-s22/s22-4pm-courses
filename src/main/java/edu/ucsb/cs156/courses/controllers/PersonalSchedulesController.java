@@ -1,7 +1,7 @@
 package edu.ucsb.cs156.courses.controllers;
 
 import edu.ucsb.cs156.courses.entities.PersonalSchedule;
-import edu.ucsb.cs156.courses.entities.Courses;
+import edu.ucsb.cs156.courses.entities.PSCourse;
 import edu.ucsb.cs156.courses.entities.User;
 import edu.ucsb.cs156.courses.errors.EntityNotFoundException;
 import edu.ucsb.cs156.courses.models.CurrentUser;
