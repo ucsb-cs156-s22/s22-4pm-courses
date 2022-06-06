@@ -10,6 +10,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withUnauthorizedRequest;
 
 import java.util.List;
+import edu.ucsb.cs156.courses.documents.PersonalSectionsFixtures;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -71,6 +72,7 @@ public class UCSBCurriculumServiceTests {
     }
 
     @Test
+
     public void test_getJSONbyQuarterAndEnroll_success() throws Exception {
         String expectedResult = "{expectedResult}";
 
@@ -82,14 +84,31 @@ public class UCSBCurriculumServiceTests {
                 enrollCd, 1, 100);
         String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + expectedParams;
 
+    public void test_getJSONbyQtrEnrollCd_success() throws Exception {
+        String expectedResult = PersonalSectionsFixtures.ONE_COURSE;
+
+        String qtr = "20221";
+        String enrollCd = "59501";
+
+
+        String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/classsection/20221/59501";
+
+
         this.mockRestServiceServer.expect(requestTo(expectedURL))
                 .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
                 .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+
                 .andExpect(header("ucsb-api-version", "3.0"))
                 .andExpect(header("ucsb-api-key", apiKey))
                 .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
 
         String result = ucs.getJSONbyQuarterAndEnroll(quarter, enrollCd);
+
+                .andExpect(header("ucsb-api-version", "1.0"))
+                .andExpect(header("ucsb-api-key", apiKey))
+                .andRespond(withSuccess(expectedResult, MediaType.APPLICATION_JSON));
+
+        String result = ucs.getJSONbyQtrEnrollCd(qtr,enrollCd);
 
         assertEquals(expectedResult, result);
     }
@@ -171,6 +190,30 @@ public class UCSBCurriculumServiceTests {
                 .andRespond(withUnauthorizedRequest());
 
         String result = ucs.getJSONbyQuarterAndEnroll(quarter, enrollCd);
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void test_getJSONbyQtrEnrollCd_exception() throws Exception {
+        String expectedResult = "{\"error\": \"401: Unauthorized\"}";
+
+        when(restTemplate.exchange(any(String.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(String.class)))
+                .thenThrow(HttpClientErrorException.class);
+
+        String qtr = "20221";
+        String enrollCd = "59501";
+
+        String expectedURL = "https://api.ucsb.edu/academics/curriculums/v3/classsection/20221/59501";
+
+        this.mockRestServiceServer.expect(requestTo(expectedURL))
+                .andExpect(header("Accept", MediaType.APPLICATION_JSON.toString()))
+                .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
+                .andExpect(header("ucsb-api-version", "1.0"))
+                .andExpect(header("ucsb-api-key", apiKey))
+                .andRespond(withUnauthorizedRequest());
+
+        String result = ucs.getJSONbyQtrEnrollCd(qtr, enrollCd);
 
         assertEquals(expectedResult, result);
     }
