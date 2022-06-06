@@ -99,13 +99,20 @@ public class UCSBCurriculumService {
     }
 
     public List<ConvertedSection> getConvertedSections(String subjectArea, String quarter, String courseLevel)
-            throws JsonProcessingException {
+	throws JsonProcessingException {
         String json = getJSON(subjectArea, quarter, courseLevel);
         CoursePage coursePage = objectMapper.readValue(json, CoursePage.class);
         List<ConvertedSection> result = coursePage.convertedSections();       
         return result;
     }
 
+    public List<CourseInfo> getConvertedSectionsByQuarterAndEnroll(String quarter, String enrollCd)
+	throws JsonProcessingException {
+        String json = getJSONbyQuarterAndEnroll(quarter, enrollCd);
+        CoursePage coursePage = objectMapper.readValue(json, CoursePage.class);
+        List<CourseInfo> result = coursePage.convertedSectionsInfo();       
+        return result;
+    }
     public String getSectionJSON(String subjectArea, String quarter, String courseLevel)
         throws JsonProcessingException {
         List<ConvertedSection> l = getConvertedSections(subjectArea, quarter, courseLevel);
@@ -217,6 +224,38 @@ public class UCSBCurriculumService {
         logger.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
         return retVal;
 
+    }
+
+    public String getJSONbyQuarterAndEnroll(String quarter, String enrollCd) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("ucsb-api-version", "3.0");
+        headers.set("ucsb-api-key", this.apiKey);
+
+        HttpEntity<String> entity = new HttpEntity<>("body", headers);
+
+        String params = String.format(
+                "?quarter=%s&enrollCode=%s&pageNumber=%d&pageSize=%d&includeClassSections=true", quarter,
+                enrollCd, 1, 100);
+        String url = "https://api.ucsb.edu/academics/curriculums/v3/classes/search" + params;
+
+        logger.info("url=" + url);
+
+        String retVal = "";
+        MediaType contentType = null;
+        HttpStatus statusCode = null;
+        try {
+            ResponseEntity<String> re = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            contentType = re.getHeaders().getContentType();
+            statusCode = re.getStatusCode();
+            retVal = re.getBody();
+        } catch (HttpClientErrorException e) {
+            retVal = "{\"error\": \"401: Unauthorized\"}";
+        }
+        logger.info("json: {} contentType: {} statusCode: {}", retVal, contentType, statusCode);
+        return retVal;
     }
 
 }

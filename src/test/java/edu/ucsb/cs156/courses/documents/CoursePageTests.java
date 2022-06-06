@@ -16,10 +16,10 @@ public class CoursePageTests {
 
     @Test
     public void convertsCoursePageToObject()  {
-        CoursePage cp = CoursePage.fromJSON(CoursePageFixtures.COURSE_PAGE_JSON);
+        CoursePage cp = CoursePage.fromJSON(CoursePageFixtures.COURSE_PAGE_JSON_MATH3B);
         assertEquals(1, cp.getPageNumber());
         assertEquals(10, cp.getPageSize());
-        assertEquals(49, cp.getTotal());
+        assertEquals(1, cp.getTotal());
     }
 
 
