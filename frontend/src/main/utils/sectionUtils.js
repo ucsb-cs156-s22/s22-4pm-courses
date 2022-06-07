@@ -73,6 +73,14 @@ export const formatInstructors = (instructorArray) => {
     }
 }
 
+
+// Takes section number array and returns the sections
+export const sectionNumber = (en1) => {
+    return (en1 != null) ? `${en1}` : "N/A";
+}
+
+
 export const isSection = (en1) => {
     return (en1.substring(2) !== "00")
+
 }

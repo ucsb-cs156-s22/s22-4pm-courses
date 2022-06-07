@@ -1,8 +1,6 @@
 import SectionsTableBase from "main/components/SectionsTableBase";
-
 import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
-import { convertToFraction, formatDays, formatInstructors, formatLocation, formatTime, isSection } from "main/utils/sectionUtils.js";
-
+import { convertToFraction, formatDays, formatInstructors, formatLocation, formatTime, isSection, sectionNumber } from "main/utils/sectionUtils.js";
 
 function getFirstVal(values) {
     return values[0];
@@ -43,6 +41,14 @@ export default function SectionsTable({ sections }) {
             accessor: (row) => isSection(row.section.section),
             // Stryker disable next-line StringLiteral: this column is hidden, very hard to test
             id: 'isSection',
+        },
+        {
+            Header: 'Section Number',
+            accessor: (row) => sectionNumber(row.section.section),
+            id: 'sectionNumber',
+
+            aggregate: getFirstVal,
+            Aggregated: ({ cell: { value } }) => `${value}`
         },
         {
             Header: 'Enrolled',
